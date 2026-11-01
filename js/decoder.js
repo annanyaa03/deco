@@ -212,3 +212,70 @@ function renderDecoderSchematic(a, g1, g2a, g2b, isEnabled, sel, outs) {
   `;
 }
 
+
+// -- Phase 3 Adapter ---------------------------------------------------------
+const _decAdapter = {
+  id: "dec",
+  getInputs() {
+    return [
+      { key: "A2", label: "A2", value: DecoderState.a[0] },
+      { key: "A1", label: "A1", value: DecoderState.a[1] },
+      { key: "A0", label: "A0", value: DecoderState.a[2] },
+    ];
+  },
+  getOutputs() {
+    const { a, g1, g2a, g2b } = DecoderState;
+    const isEnabled = (g1 === 1) && (g2a === 0) && (g2b === 0);
+    const sel = (a[0] << 2) | (a[1] << 1) | a[2];
+    const outs = [1,1,1,1,1,1,1,1];
+    if (isEnabled) outs[sel] = 0;
+    return outs.map((v, i) => ({ key: `Y${i}`, label: `Y${i}`, value: 1 - v }));
+  },
+  getAllCombinations() {
+    const c = [{ a: [0,0,0], g1: 0, g2a: 0, g2b: 0 }];
+    for (let i = 0; i < 8; i++)
+      c.push({ a: [(i>>2)&1, (i>>1)&1, i&1], g1: 1, g2a: 0, g2b: 0 });
+    return c;
+  },
+  applyInputs(combo) {
+    DecoderState.a = [...combo.a];
+    DecoderState.g1 = combo.g1;
+    DecoderState.g2a = combo.g2a;
+    DecoderState.g2b = combo.g2b;
+    renderDecoderControls();
+    updateDecoder();
+  },
+  resetFn() { resetDecoder(); },
+  toggleInputByIndex(idx) {
+    if (idx < 3) toggleDecoderAddress(idx);
+    else if (idx === 3) toggleDecoderG1();
+  },
+  getSignalLabels() {
+    return [
+      { label: "A2", getValue: () => DecoderState.a[0] },
+      { label: "A1", getValue: () => DecoderState.a[1] },
+      { label: "A0", getValue: () => DecoderState.a[2] },
+      { label: "En", getValue: () => (DecoderState.g1===1&&DecoderState.g2a===0&&DecoderState.g2b===0)?1:0 },
+    ];
+  },
+  getLiveBoolHTML() {
+    const { a, g1, g2a, g2b } = DecoderState;
+    const isEnabled = (g1===1)&&(g2a===0)&&(g2b===0);
+    const sel = (a[0]<<2)|(a[1]<<1)|a[2];
+    const res = (v) => `<span class="eq-result ${v?'eq-high':'eq-low'}">${v}</span>`;
+    if (!isEnabled) return `<div><span class="eq-name">Disabled</span> &mdash; All outputs HIGH</div>`;
+    return `<div><span class="eq-name">G1=1,G2A=0,G2B=0</span> &rarr; m${sel} &rarr; <span class="eq-term-active">Y${sel}=0</span></div>`;
+  },
+};
+
+// Patch initDecoder
+const _decInitOrig = window.initDecoder;
+window.initDecoder = function() {
+  _decInitOrig();
+  if (window.DecoInteractivity) DecoInteractivity.init(_decAdapter);
+};
+const _decUpdateOrig = window.updateDecoder;
+window.updateDecoder = function() {
+  _decUpdateOrig();
+  if (window.DecoInteractivity) DecoInteractivity.onUpdate();
+};

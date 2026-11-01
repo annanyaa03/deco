@@ -17,6 +17,7 @@ const DEFAULT_ENCODER = {
 function initEncoder() {
   renderEncoderControls();
   updateEncoder();
+  if (window.DecoInteractivity) DecoInteractivity.init(_encAdapter);
 }
 
 function resetEncoder() {
@@ -160,6 +161,7 @@ function updateEncoder() {
 
   // 3. Render Schematic
   renderEncoderSchematic(inputs, ei, isEnabled, winningIndex, a2, a1, a0, gs, eo);
+  if (window.DecoInteractivity) DecoInteractivity.onUpdate();
 }
 
 function renderEncoderSchematic(inputs, ei, isEnabled, winner, a2, a1, a0, gs, eo) {
@@ -232,3 +234,94 @@ function renderEncoderSchematic(inputs, ei, isEnabled, winner, a2, a1, a0, gs, e
   `;
 }
 
+// ── Phase 3 Adapter ─────────────────────────────────────────────────────────
+const _encAdapter = {
+  id: "enc",
+
+  getInputs() {
+    return EncoderState.inputs.map((v, i) => ({ key: `I${i}`, label: `I${i}`, value: 1 - v }));
+  },
+
+  getOutputs() {
+    const { inputs, ei } = EncoderState;
+    const isEnabled = ei === 0;
+    let winner = -1;
+    let a2 = 1, a1 = 1, a0 = 1;
+    if (isEnabled) {
+      for (let i = 7; i >= 0; i--) { if (inputs[i] === 0) { winner = i; break; } }
+      if (winner !== -1) {
+        a2 = ((winner >> 2) & 1) ? 0 : 1;
+        a1 = ((winner >> 1) & 1) ? 0 : 1;
+        a0 = (winner & 1) ? 0 : 1;
+      }
+    }
+    return [
+      { key: "A2", label: "A2", value: 1 - a2 },
+      { key: "A1", label: "A1", value: 1 - a1 },
+      { key: "A0", label: "A0", value: 1 - a0 },
+    ];
+  },
+
+  getAllCombinations() {
+    const c = [];
+    // EI=0, no input active
+    const base = [1,1,1,1,1,1,1,1];
+    c.push({ inputs: [...base], ei: 0 });
+    // EI=0, each input active
+    for (let i = 7; i >= 0; i--) {
+      const inp = [...base]; inp[i] = 0;
+      c.push({ inputs: inp, ei: 0 });
+    }
+    // EI=1 (disabled)
+    c.push({ inputs: [...base], ei: 1 });
+    return c;
+  },
+
+  applyInputs(combo) {
+    EncoderState.inputs = [...combo.inputs];
+    EncoderState.ei = combo.ei;
+    renderEncoderControls();
+    updateEncoder();
+  },
+
+  resetFn() { resetEncoder(); },
+
+  toggleInputByIndex(idx) {
+    if (idx < 8) toggleEncoderInput(idx);
+    else if (idx === 8) toggleEncoderEI();
+  },
+
+  getSignalLabels() {
+    const labels = [];
+    for (let i = 0; i < 8; i++) {
+      const ii = i;
+      labels.push({ label: `I${ii}`, getValue: () => 1 - EncoderState.inputs[ii] });
+    }
+    const { inputs, ei } = EncoderState;
+    const isEnabled = ei === 0;
+    let winner = -1;
+    if (isEnabled) for (let i = 7; i >= 0; i--) { if (inputs[i] === 0) { winner = i; break; } }
+    const getA2 = () => { const w = winner; return w !== -1 && isEnabled ? (1 - (((w >> 2) & 1) ? 0 : 1)) : 0; };
+    labels.push({ label: "A2", getValue: () => EncoderState.ei === 0 && winner !== -1 ? (((winner >> 2) & 1) ? 1 : 0) : 0 });
+    labels.push({ label: "A1", getValue: () => EncoderState.ei === 0 && winner !== -1 ? (((winner >> 1) & 1) ? 1 : 0) : 0 });
+    labels.push({ label: "A0", getValue: () => EncoderState.ei === 0 && winner !== -1 ? ((winner & 1) ? 1 : 0) : 0 });
+    return labels;
+  },
+
+  getLiveBoolHTML() {
+    const { inputs, ei } = EncoderState;
+    const isEnabled = ei === 0;
+    let winner = -1;
+    if (isEnabled) for (let i = 7; i >= 0; i--) { if (inputs[i] === 0) { winner = i; break; } }
+    const res = (v) => `<span class="eq-result ${v ? 'eq-high' : 'eq-low'}">${v}</span>`;
+    if (!isEnabled) return `<div><span class="eq-name">EI=1 (Disabled)</span> — All outputs HIGH = ${res(0)}</div>`;
+    if (winner === -1) return `<div><span class="eq-name">No active input</span> — EO=0 (cascade) = ${res(1)}</div>`;
+    const a2 = ((winner >> 2) & 1) ? 0 : 1;
+    const a1 = ((winner >> 1) & 1) ? 0 : 1;
+    const a0 = (winner & 1) ? 0 : 1;
+    return `<div><span class="eq-name">Priority Winner: I${winner}</span>
+      &rarr; A2A1A0 = <span class="eq-term-active">${a2}${a1}${a0}</span>
+      (active-low = ${res(0)},${res(0)},${res(0)} inverted)
+    </div>`;
+  },
+};
