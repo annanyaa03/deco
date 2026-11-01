@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DECO MINI — Combinational Logic Circuit Workbench</title>
+  <meta name="description" content="Interactive digital circuit simulator, truth tables, and educational guides for fundamental TTL combinational logic ICs." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">MVP</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#circuits" class="nav-link">Circuits</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          Repository
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        Digital Electronics Learning Suite
+      </div>
+      <h1 class="hero-title">
+        Master <span class="highlight">Combinational Logic</span> Through Interactive Circuits
+      </h1>
+      <p class="hero-desc">
+        A student-friendly engineering platform designed for exploring multiplexers, demultiplexers,
+        decoders, priority encoders, arithmetic adders, and parity circuits. Test live logic with
+        active signal visualization, authentic IC enable conditions, and dynamically highlighted truth tables.
+      </p>
+      <div class="hero-actions">
+        <a href="#circuits" class="btn-primary">
+          Explore Circuits
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="#about" class="btn-secondary">
+          About the Platform
+        </a>
+      </div>
+
+      <div class="features-strip">
+        <div class="feature-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          True Hardware IC Logic
+        </div>
+        <div class="feature-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+          Real-time Truth Tables
+        </div>
+        <div class="feature-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          Active-Low & Enable Accurate
+        </div>
+        <div class="feature-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Zero Build • Pure Vanilla JS
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Circuit Directory Section -->
+  <section class="section-wrap" id="circuits">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Interactive Directory</div>
+        <h2 class="section-title">Standard Combinational ICs</h2>
+        <p class="section-subtitle">
+          Select a logic circuit below to access its dedicated interactive simulation, 
+          hardware pin descriptions, Boolean expressions, and complete truth table.
+        </p>
+      </div>
+
+      <div class="circuit-grid">
+        <!-- 1. 4:1 Multiplexer (74153) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74153</span>
+            <span class="spec-tag">Data Selector</span>
+          </div>
+          <h3>4:1 Multiplexer</h3>
+          <p>
+            Selects one of four parallel data inputs (D0–D3) and routes it to a single output line using two binary address select lines and an active-low strobe.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="60,10 130,25 130,65 60,80" fill="#EEF2F7" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="20" y1="25" x2="60" y2="25" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="20" y1="40" x2="60" y2="40" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="20" y1="55" x2="60" y2="55" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="20" y1="70" x2="60" y2="70" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="130" y1="45" x2="175" y2="45" stroke="#0891B2" stroke-width="2"/>
+              <circle cx="175" cy="45" r="3.5" fill="#0891B2"/>
+              <text x="95" y="49" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">4:1</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">4 Data Inputs</span>
+            <span class="spec-tag">2 Select (S1, S0)</span>
+            <span class="spec-tag">Active-Low Ḡ</span>
+          </div>
+          <a href="pages/mux-4-1.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 2. 8:1 Multiplexer (74151) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74151</span>
+            <span class="spec-tag">Data Selector</span>
+          </div>
+          <h3>8:1 Multiplexer</h3>
+          <p>
+            Selects one of eight data inputs using three binary address lines, providing both true (Y) and inverted (W̄) outputs with an active-low enable strobe.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="60,8 135,22 135,68 60,82" fill="#EEF2F7" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="20" y1="20" x2="60" y2="20" stroke="#2563EB" stroke-width="1.5"/>
+              <line x1="20" y1="35" x2="60" y2="35" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="20" y1="55" x2="60" y2="55" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="20" y1="70" x2="60" y2="70" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="135" y1="36" x2="175" y2="36" stroke="#0891B2" stroke-width="1.8"/>
+              <line x1="135" y1="54" x2="175" y2="54" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="97" y="49" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">8:1</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">8 Data Inputs</span>
+            <span class="spec-tag">3 Select (S2..S0)</span>
+            <span class="spec-tag">Dual Y / W̄</span>
+          </div>
+          <a href="pages/mux-8-1.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 3. 1:4 Demultiplexer (74139) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74139</span>
+            <span class="spec-tag">Data Distributor</span>
+          </div>
+          <h3>1:4 Demultiplexer</h3>
+          <p>
+            Distributes a single input signal to one of four output channels determined by a 2-bit address. Emulates one section of the dual 74139 with active-low outputs.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="60,25 130,10 130,80 60,65" fill="#EEF2F7" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="20" y1="45" x2="60" y2="45" stroke="#2563EB" stroke-width="2"/>
+              <line x1="130" y1="25" x2="175" y2="25" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="130" y1="40" x2="175" y2="40" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="130" y1="55" x2="175" y2="55" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="130" y1="70" x2="175" y2="70" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="95" y="49" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">1:4</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">1 Input (Din)</span>
+            <span class="spec-tag">4 Active-Low Outputs</span>
+            <span class="spec-tag">Enable 1Ḡ</span>
+          </div>
+          <a href="pages/demux-1-4.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 4. 3:8 Decoder (74138) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74138</span>
+            <span class="spec-tag">Minterm Generator</span>
+          </div>
+          <h3>3:8 Inverting Decoder</h3>
+          <p>
+            Decodes a 3-bit binary input into 1 of 8 mutually exclusive active-low output lines. Features a 3-line gating enable system (G1, Ḡ2A, Ḡ2B) for easy cascading.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="65" y="15" width="70" height="60" rx="4" fill="#EEF2F7" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="25" y1="30" x2="65" y2="30" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="25" y1="45" x2="65" y2="45" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="25" y1="60" x2="65" y2="60" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="135" y1="25" x2="175" y2="25" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="135" y1="45" x2="175" y2="45" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="135" y1="65" x2="175" y2="65" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="100" y="49" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">3:8</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">3 Binary Inputs</span>
+            <span class="spec-tag">8 Active-Low Lines</span>
+            <span class="spec-tag">3 Enable Pins</span>
+          </div>
+          <a href="pages/decoder-3-8.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 5. 8:3 Priority Encoder (74148) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74148</span>
+            <span class="spec-tag">Priority Resolver</span>
+          </div>
+          <h3>8:3 Priority Encoder</h3>
+          <p>
+            Identifies the highest-priority active input among eight active-low lines and outputs its inverted 3-bit binary code, along with group select (ḠS) and enable output (ĒO).
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="65" y="15" width="70" height="60" rx="4" fill="#EEF2F7" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="25" y1="25" x2="65" y2="25" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="25" y1="40" x2="65" y2="40" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="25" y1="55" x2="65" y2="55" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="25" y1="70" x2="65" y2="70" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="135" y1="30" x2="175" y2="30" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="135" y1="45" x2="175" y2="45" stroke="#DC2626" stroke-width="1.8"/>
+              <line x1="135" y1="60" x2="175" y2="60" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="100" y="49" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">8:3</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">8 Inputs (Ī0..Ī7)</span>
+            <span class="spec-tag">3 Active-Low Outs</span>
+            <span class="spec-tag">ĒI, ĒO, ḠS Flags</span>
+          </div>
+          <a href="pages/encoder-8-3.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- ── Arithmetic & Error-Detection Circuits ── -->
+      </div>
+
+      <div class="subsection-label">Arithmetic &amp; Error-Detection Circuits</div>
+      <div class="circuit-grid">
+
+        <!-- 6. Half Adder (7486 + 7408) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 7486 + 7408</span>
+            <span class="spec-tag">Gate-Level Adder</span>
+          </div>
+          <h3>Half Adder</h3>
+          <p>
+            Adds two single bits using an XOR gate for Sum and an AND gate for Carry. The foundational building block of all binary arithmetic hardware.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- XOR gate body -->
+              <path d="M50,20 Q65,20 75,30 Q65,45 75,60 Q65,60 50,60 Q60,45 50,20Z" fill="#EEF2F7" stroke="#2563EB" stroke-width="1.8"/>
+              <path d="M50,20 Q60,45 50,60" fill="none" stroke="#2563EB" stroke-width="1.8"/>
+              <!-- AND gate body -->
+              <path d="M110,30 L110,60 L125,60 Q145,60 145,45 Q145,30 125,30 Z" fill="#EEF2F7" stroke="#0891B2" stroke-width="1.8"/>
+              <!-- Input wires -->
+              <line x1="15" y1="30" x2="50" y2="30" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="15" y1="50" x2="50" y2="50" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="15" y1="30" x2="110" y2="37" stroke="#2563EB" stroke-width="1.4"/>
+              <line x1="15" y1="50" x2="110" y2="53" stroke="#94A3B8" stroke-width="1.4"/>
+              <!-- Output wires -->
+              <line x1="75" y1="40" x2="100" y2="40" stroke="#2563EB" stroke-width="1.8"/>
+              <text x="102" y="43" fill="#0F172A" font-size="9" font-weight="700">S</text>
+              <line x1="145" y1="45" x2="175" y2="45" stroke="#0891B2" stroke-width="1.8"/>
+              <text x="177" y="48" fill="#0F172A" font-size="9" font-weight="700">C</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">2 Inputs (A, B)</span>
+            <span class="spec-tag">Sum (XOR)</span>
+            <span class="spec-tag">Carry (AND)</span>
+          </div>
+          <a href="pages/half-adder.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 7. Full Adder (2× HA + OR; ref IC 7483) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 7483 ref.</span>
+            <span class="spec-tag">Arithmetic Adder</span>
+          </div>
+          <h3>Full Adder</h3>
+          <p>
+            Adds three bits (A, B, Carry-in) producing a Sum and Carry-out. Built from two half adders plus an OR gate; forms the core cell of ripple-carry and look-ahead adders.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- HA1 block -->
+              <rect x="30" y="20" width="40" height="50" rx="4" fill="#EEF2F7" stroke="#2563EB" stroke-width="1.8"/>
+              <text x="50" y="42" fill="#0F172A" font-size="9" font-weight="800" text-anchor="middle">HA</text>
+              <text x="50" y="54" fill="#475569" font-size="8" text-anchor="middle">7486+7408</text>
+              <!-- HA2 block -->
+              <rect x="110" y="20" width="40" height="50" rx="4" fill="#EEF2F7" stroke="#0891B2" stroke-width="1.8"/>
+              <text x="130" y="42" fill="#0F172A" font-size="9" font-weight="800" text-anchor="middle">HA</text>
+              <text x="130" y="54" fill="#475569" font-size="8" text-anchor="middle">gate-level</text>
+              <!-- Connections -->
+              <line x1="5" y1="30" x2="30" y2="30" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="5" y1="50" x2="30" y2="50" stroke="#94A3B8" stroke-width="1.8"/>
+              <line x1="70" y1="35" x2="110" y2="35" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="5" y1="65" x2="110" y2="55" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3 2"/>
+              <!-- Outputs -->
+              <line x1="150" y1="35" x2="175" y2="35" stroke="#2563EB" stroke-width="1.8"/>
+              <text x="177" y="38" fill="#0F172A" font-size="9" font-weight="700">S</text>
+              <line x1="150" y1="55" x2="175" y2="55" stroke="#0891B2" stroke-width="1.8"/>
+              <text x="177" y="58" fill="#0F172A" font-size="9" font-weight="700">Cout</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">3 Inputs (A, B, Cin)</span>
+            <span class="spec-tag">Sum + Carry-out</span>
+            <span class="spec-tag">8-row Truth Table</span>
+          </div>
+          <a href="pages/full-adder.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+        <!-- 8. Parity Generator/Checker (74180) -->
+        <article class="circuit-card">
+          <div class="card-top">
+            <span class="ic-badge">IC 74180</span>
+            <span class="spec-tag">Parity Logic</span>
+          </div>
+          <h3>9-bit Parity Generator / Checker</h3>
+          <p>
+            Generates or verifies even/odd parity across 8 data bits with cascade inputs (EVEN, ODD) and dual complementary outputs (ΣEVEN, ΣODD) based on an XOR tree.
+          </p>
+          <div class="card-preview">
+            <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- XOR tree representation -->
+              <rect x="65" y="15" width="70" height="60" rx="4" fill="#EEF2F7" stroke="#2563EB" stroke-width="1.8"/>
+              <line x1="25" y1="25" x2="65" y2="30" stroke="#2563EB" stroke-width="1.5"/>
+              <line x1="25" y1="35" x2="65" y2="35" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="25" y1="45" x2="65" y2="40" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="25" y1="55" x2="65" y2="50" stroke="#94A3B8" stroke-width="1.5"/>
+              <line x1="25" y1="65" x2="65" y2="60" stroke="#94A3B8" stroke-width="1.5"/>
+              <text x="100" y="42" fill="#0F172A" font-size="9" font-weight="800" text-anchor="middle">74180</text>
+              <text x="100" y="54" fill="#475569" font-size="8" text-anchor="middle">XOR Tree</text>
+              <line x1="135" y1="35" x2="175" y2="35" stroke="#2563EB" stroke-width="1.8"/>
+              <text x="177" y="38" fill="#0F172A" font-size="8" font-weight="700">ΣE</text>
+              <line x1="135" y1="55" x2="175" y2="55" stroke="#0891B2" stroke-width="1.8"/>
+              <text x="177" y="58" fill="#0F172A" font-size="8" font-weight="700">ΣO</text>
+            </svg>
+          </div>
+          <div class="card-specs">
+            <span class="spec-tag">8 Data + 2 Cascade</span>
+            <span class="spec-tag">ΣEVEN / ΣODD</span>
+            <span class="spec-tag">Generator + Checker</span>
+          </div>
+          <a href="pages/parity-gen-check.html" class="card-btn">
+            Explore Circuit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section-wrap" id="about" style="background: var(--bg-surface); border-top: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Educational Context</div>
+        <h2 class="section-title">About DECO MINI</h2>
+        <p class="section-subtitle">
+          Designed specifically for second-year undergraduate engineering students in Digital Electronics, Computer Architecture, and Microprocessor Systems.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h3>What is Combinational Logic?</h3>
+          <p>
+            Unlike sequential logic which depends on memory elements and clock cycles, combinational logic circuits produce outputs that depend purely on the instantaneous values of their present inputs. They form the foundational building blocks of arithmetic logic units (ALUs), memory addressing units, and communication multiplexers.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3>Why It Matters</h3>
+          <p>
+            Understanding how TTL chips like the 74153, 74138, and 74148 operate at the pin level is critical for bridging high-level digital design and real hardware behavior. Practical engineering requires knowing how active-low strobes prevent bus contention and how priority resolvers handle simultaneous interrupt requests.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <h3>What Students Learn</h3>
+          <ul class="about-list">
+            <li>Pinout and truth table correlation for standard 74xx ICs</li>
+            <li>Active-low vs. active-high signal conventions and inverted outputs</li>
+            <li>Multi-line enable gating and chip cascade strategies</li>
+            <li>Boolean expression derivation and logic simplification</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">A clean, practical educational platform for combinational logic circuits.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#circuits">Circuits</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

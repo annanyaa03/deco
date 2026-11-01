@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parity Generator / Checker (IC 74180) — DECO MINI</title>
+  <meta name="description" content="Interactive 9-bit Parity Generator and Checker simulation using IC 74180. Live XOR-tree SVG, function table, mode explainer, and Boolean equations." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 74180</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">9-bit Parity Generator / Checker (74180)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title & 2. Introduction -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 74180</span>
+        <span class="badge-active-high">9-bit Odd/Even Parity</span>
+      </div>
+      <h1>9-bit Parity Generator / Checker</h1>
+      <p class="circuit-principle">
+        The <strong>IC 74180</strong> is a 9-bit odd/even parity generator and checker.
+        It accepts 8 data inputs (<strong>A–H</strong>) and two cascade control inputs
+        (<strong>EVEN</strong> and <strong>ODD</strong>), and produces dual complementary outputs
+        (<strong>ΣEVEN</strong> and <strong>ΣODD</strong>). Internally it implements an XOR
+        reduction tree: the parity of A through H is XORed with the cascade inputs, making the
+        device cascadable to handle 16-bit, 32-bit, or wider words.
+      </p>
+    </section>
+
+    <!-- Generator vs Checker Explainer -->
+    <div class="info-box">
+      <strong>Generator vs Checker Mode</strong><br /><br />
+      <strong>As a Generator:</strong> Connect 8 data bits to A–H, set EVEN=1 ODD=0. ΣEVEN goes HIGH if the data has even parity — this bit is appended to the data word for transmission.<br /><br />
+      <strong>As a Checker:</strong> Connect 8 data bits + the received parity bit (9 bits total, spread across A–H and one cascade input). If ΣEVEN=L and ΣODD=H, a single-bit error has occurred in transmission.
+    </div>
+
+    <!-- 3. Pin Details -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Data Inputs <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">A, B, C, D, E, F, G, H</div>
+        <p>8 data bits whose XOR reduction determines the raw parity value fed into the cascade logic.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Cascade EVEN <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">EVEN input</div>
+        <p>Set HIGH to assert even-parity convention. If both EVEN and ODD are the same (both H or both L), a special forced-output mode activates.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Cascade ODD <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">ODD input</div>
+        <p>Set HIGH to assert odd-parity convention. In normal operation, EVEN and ODD are complements of each other.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>ΣEVEN Output <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">ΣEVEN</div>
+        <p>HIGH when the combined parity of A–H plus cascade inputs produces an even total count of 1s.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>ΣODD Output <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">ΣODD</div>
+        <p>HIGH when the combined parity produces an odd total count of 1s. Always the complement of ΣEVEN in normal mode.</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive Parity Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetParity()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset (A–H=0, EVEN=1, ODD=0)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Data Inputs A–H</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">8 data bits</span>
+            </div>
+            <div class="switches-row" id="par-data-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Cascade Inputs</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">EVEN / ODD</span>
+            </div>
+            <div class="switches-row" id="par-cascade-switches"></div>
+          </div>
+
+          <!-- Live Status -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Live Status</span>
+              <span id="par-mode-label" style="color:var(--primary); font-family:var(--font-mono); font-size:0.8rem;"></span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px; padding:8px 12px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border);">
+              <span style="font-family:var(--font-mono); font-size:0.82rem; color:var(--text-muted);">Count of 1s in A–H:</span>
+              <span id="par-count" style="font-family:var(--font-mono); font-size:1.1rem; font-weight:800; color:var(--text); margin-left:auto;">0</span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="par-out-pill-even">
+                <span class="led-indicator" id="par-led-even"></span>
+                <span class="out-name">ΣEVEN:</span>
+                <span class="out-val" id="par-val-even">0</span>
+              </div>
+              <div class="output-pill" id="par-out-pill-odd">
+                <span class="led-indicator" id="par-led-odd"></span>
+                <span class="out-name">ΣODD:</span>
+                <span class="out-val" id="par-val-odd">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">XOR-Tree Signal Flow</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">Teal Wire = Logic 1</span>
+          </div>
+          <div class="schematic-svg-wrap" id="par-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Function Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Function Table — IC 74180</h3>
+        <p>The row matching the current # of HIGH inputs + cascade state is highlighted in real-time.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="par-table">
+          <thead>
+            <tr>
+              <th># of HIGH in A–H</th>
+              <th>EVEN</th>
+              <th>ODD</th>
+              <th>ΣEVEN</th>
+              <th>ΣODD</th>
+              <th>Mode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 0: Even count, EVEN=H ODD=L -->
+            <tr><td>Even</td><td>H</td><td>L</td><td><strong>H</strong></td><td><strong>L</strong></td><td>Gen Even</td></tr>
+            <!-- Row 1: Odd count, EVEN=H ODD=L -->
+            <tr><td>Odd</td> <td>H</td><td>L</td><td><strong>L</strong></td><td><strong>H</strong></td><td>Gen Odd</td></tr>
+            <!-- Row 2: Even count, EVEN=L ODD=H -->
+            <tr><td>Even</td><td>L</td><td>H</td><td><strong>L</strong></td><td><strong>H</strong></td><td>Chk Even</td></tr>
+            <!-- Row 3: Odd count, EVEN=L ODD=H -->
+            <tr><td>Odd</td> <td>L</td><td>H</td><td><strong>H</strong></td><td><strong>L</strong></td><td>Chk Odd</td></tr>
+            <!-- Row 4: Both H (forced) -->
+            <tr><td>X</td>   <td>H</td><td>H</td><td><strong>L</strong></td><td><strong>L</strong></td><td>Forced LOW</td></tr>
+            <!-- Row 5: Both L (forced) -->
+            <tr><td>X</td>   <td>L</td><td>L</td><td><strong>H</strong></td><td><strong>H</strong></td><td>Forced HIGH</td></tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">H = HIGH, L = LOW, X = Don't Care</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equations</h3>
+        <p class="equation-note">
+          The raw data parity is computed by XOR reduction of all 8 data bits:
+        </p>
+        <div class="equation-box">
+          P = A ⊕ B ⊕ C ⊕ D ⊕ E ⊕ F ⊕ G ⊕ H<br /><br />
+          ΣEVEN = P ⊕ ODD &nbsp;&nbsp; (= NOT(P ⊕ EVEN))<br />
+          ΣODD  = P ⊕ EVEN &nbsp;(= NOT(P ⊕ ODD))<br /><br />
+          Special cases:<br />
+          If EVEN = ODD = H → ΣEVEN = ΣODD = L<br />
+          If EVEN = ODD = L → ΣEVEN = ΣODD = H
+        </div>
+        <p class="equation-note">
+          In normal operation EVEN and ODD are always complementary. ΣEVEN and ΣODD are always complementary outputs,
+          making the IC useful as both a generator (produce one parity bit) and a checker (detect errors with the complementary output).
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Where parity generation and checking is used in digital systems.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M7 15h0M2 9.5h20"></path>
+            </svg>
+            Memory Error Detection
+          </h4>
+          <p>DRAM and SRAM memory systems append a parity bit per byte. On read, the 74180 recomputes parity across all 9 bits (8 data + stored parity). A mismatch on ΣODD flags a single-bit error.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            Serial Communication (UART Parity)
+          </h4>
+          <p>UART/RS-232 interfaces transmit an optional parity bit after each data byte. The 74180 computes even or odd parity for the data bits, and the receiver uses an identical circuit to check every byte.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Bus Integrity Checks
+          </h4>
+          <p>Address and data buses in embedded systems use 74180 circuits to monitor signal integrity. Any even-count corruption on a normally-odd bus immediately asserts an error flag to the processor.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            Cascading for 16+ bit Words
+          </h4>
+          <p>By chaining two 74180 ICs via their cascade inputs (ΣODD of one feeds ODD of the next), 16-bit, 32-bit or wider parity can be computed and checked with no additional delay beyond propagation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <a href="full-adder.html" class="circuit-nav-link">
+        ← Full Adder
+      </a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 74180 9-bit Parity Generator/Checker Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/parity.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initParity();
+    });
+  </script>
+</body>
+</html>

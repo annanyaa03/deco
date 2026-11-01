@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8:3 Priority Encoder (IC 74148) — DECO MINI</title>
+  <meta name="description" content="Interactive 8:3 Priority Encoder simulation, logic equations, truth table, and cascading pinout details for IC 74148." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 74148</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">8:3 Priority Encoder (74148)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title and IC Number & 2. Introduction and Working Principle -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 74148</span>
+        <span class="badge-active-low">8-to-3 Priority Resolver</span>
+      </div>
+      <h1>8:3 Priority Encoder</h1>
+      <p class="circuit-principle">
+        The <strong>74148</strong> encodes eight active-low data request lines (<strong>Ī0 through Ī7</strong>) into an active-low 3-bit binary code 
+        (<strong>Ā2, Ā1, Ā0</strong>) corresponding to the <strong>highest-priority active input</strong>. 
+        Input <strong>Ī7 has the absolute highest priority</strong>, while Ī0 possesses the lowest. 
+        Active-low logic means logic <strong>LOW (0) indicates an active signal</strong>, while HIGH (1) represents idle. 
+        The IC includes an active-low Enable Input (<strong>ĒI</strong>), a Group Select status line (<strong>ḠS</strong>) indicating whether any input is asserted, 
+        and an Enable Output (<strong>ĒO</strong>) for seamless multi-stage priority cascading.
+      </p>
+    </section>
+
+    <!-- 3. Technical Details Grid -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Data Request Inputs <span class="badge-active-low">Active-Low</span></h4>
+        <div class="pin-title">Ī0 to Ī7 (0 = Active)</div>
+        <p>8 priority lines. Ī7 highest priority down to Ī0. Lower inputs are ignored if higher is 0.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Enable Input <span class="badge-active-low">Active-Low</span></h4>
+        <div class="pin-title">ĒI (Pin 5)</div>
+        <p>Must be held LOW (0) to activate encoding. When HIGH (1), all outputs are locked HIGH.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Address Outputs <span class="badge-active-low">Active-Low Code</span></h4>
+        <div class="pin-title">Ā2, Ā1, Ā0</div>
+        <p>Inverted 3-bit binary representation of the winning highest active channel index.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Status &amp; Cascade Flags <span class="badge-active-low">ḠS &amp; ĒO</span></h4>
+        <div class="pin-title">ḠS (Group) &amp; ĒO (Cascade)</div>
+        <p>ḠS = 0 when an input is valid. ĒO = 0 when enabled but NO inputs are asserted (cascading).</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive 8:3 Priority Encoder Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetEncoder()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset Default (ĒI=0, Ī7=0 active)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Input & Select Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Active-Low Inputs Ī0..Ī7 (0 = Active Request)</span>
+              <span class="badge-active-low">Amber = Asserted</span>
+            </div>
+            <div class="switches-row" id="encoder-input-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Active-Low Enable Input (ĒI)</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">0 = Enabled</span>
+            </div>
+            <div class="switches-row" id="encoder-ei-switch"></div>
+          </div>
+
+          <!-- Outputs Display -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Encoder Outputs &amp; Flags (Active-Low)</span>
+              <span id="encoder-sel-label" style="color:var(--sig-active-low); font-family:var(--font-mono);"></span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="encoder-a2-pill">
+                <span class="led-indicator" id="encoder-a2-led"></span>
+                <span class="out-name">Ā2:</span>
+                <span class="out-val" id="encoder-a2-val">0</span>
+              </div>
+              <div class="output-pill" id="encoder-a1-pill">
+                <span class="led-indicator" id="encoder-a1-led"></span>
+                <span class="out-name">Ā1:</span>
+                <span class="out-val" id="encoder-a1-val">0</span>
+              </div>
+              <div class="output-pill" id="encoder-a0-pill">
+                <span class="led-indicator" id="encoder-a0-led"></span>
+                <span class="out-name">Ā0:</span>
+                <span class="out-val" id="encoder-a0-val">0</span>
+              </div>
+              <div class="output-pill" id="encoder-gs-pill">
+                <span class="led-indicator" id="encoder-gs-led"></span>
+                <span class="out-name">ḠS:</span>
+                <span class="out-val" id="encoder-gs-val">0</span>
+              </div>
+              <div class="output-pill" id="encoder-eo-pill">
+                <span class="led-indicator" id="encoder-eo-led"></span>
+                <span class="out-name">ĒO:</span>
+                <span class="out-val" id="encoder-eo-val">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">Signal Flow &amp; Logic Diagram</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">★ Indicates Priority Winner</span>
+          </div>
+          <div class="schematic-svg-wrap" id="encoder-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Truth Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Truth Table (IC 74148 Function Table)</h3>
+        <p>Highlights active priority arbitration in real-time. Notice how higher active inputs mask lower inputs (X = Don't Care).</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="encoder-table">
+          <thead>
+            <tr>
+              <th>ĒI</th>
+              <th>Ī0</th><th>Ī1</th><th>Ī2</th><th>Ī3</th><th>Ī4</th><th>Ī5</th><th>Ī6</th><th>Ī7</th>
+              <th>Ā2</th><th>Ā1</th><th>Ā0</th>
+              <th>ḠS</th><th>ĒO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>
+              <td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td><td>1</td>
+              <td>1</td><td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td><strong>0</strong></td>
+              <td><strong>0</strong></td><td><strong>0</strong></td><td><strong>0</strong></td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td><strong>0</strong></td><td>1</td>
+              <td><strong>0</strong></td><td><strong>0</strong></td><td>1</td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td><strong>0</strong></td><td>1</td><td>1</td>
+              <td><strong>0</strong></td><td>1</td><td><strong>0</strong></td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td>X</td><td>X</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td>
+              <td><strong>0</strong></td><td>1</td><td>1</td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td>X</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td><strong>0</strong></td><td><strong>0</strong></td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td>X</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td><strong>0</strong></td><td>1</td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>X</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td><td><strong>0</strong></td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td><td>1</td>
+              <td><strong>0</strong></td><td>1</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">0 = Active (LOW), 1 = Inactive (HIGH), X = Don't Care</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equation</h3>
+        <p class="equation-note">
+          Internal logic synthesizes each active-low binary output by gating the enabled priority minterms:
+        </p>
+        <div class="equation-box">
+          Ā2 = ( ĒI' · ( Ī4'·Ī5·Ī6·Ī7 + Ī5'·Ī6·Ī7 + Ī6'·Ī7 + Ī7' ) )'<br />
+          Ā1 = ( ĒI' · ( Ī2'·Ī3·Ī4·Ī5·Ī6·Ī7 + Ī3'·Ī4·Ī5·Ī6·Ī7 + Ī6'·Ī7 + Ī7' ) )'<br />
+          Ā0 = ( ĒI' · ( Ī1'·Ī2·Ī3·Ī4·Ī5·Ī6·Ī7 + Ī3'·Ī4·Ī5·Ī6·Ī7 + Ī5'·Ī6·Ī7 + Ī7' ) )'<br />
+          ḠS = ( ĒI' · ( Ī0' + Ī1' + Ī2' + Ī3' + Ī4' + Ī5' + Ī6' + Ī7' ) )'<br />
+          ĒO = ( ĒI' · Ī0 · Ī1 · Ī2 · Ī3 · Ī4 · Ī5 · Ī6 · Ī7 )'
+        </div>
+        <p class="equation-note">
+          Note that when all inputs are inactive HIGH, <code>ĒO = 0 (LOW)</code>, asserting the enable input of a cascaded secondary encoder IC!
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Where 8:3 priority encoders are deployed in microcomputer hardware.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Microprocessor Interrupt Controllers
+          </h4>
+          <p>Resolves simultaneous hardware interrupt requests (IRQs). If a critical timer and a keyboard interrupt arrive at the same instant, the encoder prioritizes the timer and feeds its vector code to the CPU.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 20V10"></path>
+              <path d="M12 20V4"></path>
+              <path d="M6 20v-6"></path>
+            </svg>
+            Flash Analog-to-Digital Converters (ADC)
+          </h4>
+          <p>Thermometer-code outputs produced by an array of high-speed voltage comparators are converted into clean 3-bit binary words using a 74148 priority encoder stage.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Shared Bus Arbitration
+          </h4>
+          <p>Determines which master device on a shared multiprocessor bus gets immediate bus grant permissions when multiple peripheral controllers assert bus request flags concurrently.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M7 15h0M2 9.5h20"></path>
+            </svg>
+            Cascaded 16:4 &amp; 64:6 Priority Systems
+          </h4>
+          <p>By connecting the Enable Output (ĒO) of the high-order chip directly into the Enable Input (ĒI) of the low-order chip, multi-chip systems prioritize 16, 32, or 64 input lines flawlessly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation Back to Directory & Next Circuit -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="decoder-3-8.html" class="circuit-nav-link">
+          ← 3:8 Decoder (74138)
+        </a>
+        <a href="half-adder.html" class="circuit-nav-link">
+          Next: Half Adder →
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 74148 8:3 Priority Encoder Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/encoder.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initEncoder();
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4:1 Multiplexer (IC 74153) — DECO MINI</title>
+  <meta name="description" content="Interactive 4:1 Multiplexer simulation, logic equations, truth table, and pinout details for IC 74153." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 74153</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">4:1 Multiplexer (74153)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title and IC Number & 2. Introduction and Working Principle -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 74153</span>
+        <span class="badge-active-high">Dual 4-to-1 Data Selector</span>
+      </div>
+      <h1>4:1 Multiplexer</h1>
+      <p class="circuit-principle">
+        A <strong>4:1 Multiplexer</strong> (Data Selector) steers one of four binary data input channels (D0, D1, D2, D3) 
+        to a single output channel (Y) under the control of a 2-bit binary address select bus (S1, S0). 
+        The classic TTL IC <strong>74153</strong> contains two independent 4-line multiplexers on one chip, 
+        each equipped with an active-low Strobe/Enable input (Ḡ). When the strobe is HIGH (1), the output is forced LOW (0) regardless of the data or select lines.
+      </p>
+    </section>
+
+    <!-- 3. Input, Output, Select-line, and Enable-line Details -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Data Inputs <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">D0, D1, D2, D3</div>
+        <p>Four independent binary inputs carrying signal data to be selected.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Address Select Lines <span class="badge-active-high">Binary Coded</span></h4>
+        <div class="pin-title">S1 (MSB), S0 (LSB)</div>
+        <p>2-bit binary control code addressing channel index 0 (00), 1 (01), 2 (10), or 3 (11).</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Enable Strobe <span class="badge-active-low">Active-Low</span></h4>
+        <div class="pin-title">Ḡ (Pin 1 / 15)</div>
+        <p>Active-low chip enable. When Ḡ = 0, the circuit is active. When Ḡ = 1, output Y = 0.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Data Output <span class="badge-active-high">Non-Inverted</span></h4>
+        <div class="pin-title">Y</div>
+        <p>Routes the logical state of the addressed input line when Ḡ = 0.</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive 4:1 MUX Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetMux41()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset Default (D0=1, S=00, Ḡ=0)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Input & Select Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Data Inputs (0 / 1)</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">Channels D0–D3</span>
+            </div>
+            <div class="switches-row" id="mux41-data-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Address Select Bus [S1, S0]</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">2-bit Decoder Code</span>
+            </div>
+            <div class="switches-row" id="mux41-select-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Enable Strobe Input Ḡ</span>
+              <span class="badge-active-low">Active-Low</span>
+            </div>
+            <div class="switches-row" id="mux41-enable-switch"></div>
+          </div>
+
+          <!-- Outputs Display -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Live Output Stage</span>
+              <span id="mux41-sel-label" style="color:var(--accent-cyan); font-family:var(--font-mono);"></span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="mux41-out-pill">
+                <span class="led-indicator" id="mux41-led-y"></span>
+                <span class="out-name">Output Y:</span>
+                <span class="out-val" id="mux41-val-y">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">Signal Flow &amp; Logic Diagram</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">Cyan Wire = Logic 1</span>
+          </div>
+          <div class="schematic-svg-wrap" id="mux41-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Truth Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Truth Table (IC 74153 Function Table)</h3>
+        <p>The row matching the current input and select state is highlighted in real-time.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="mux41-table">
+          <thead>
+            <tr>
+              <th>Strobe Ḡ (Active-Low)</th>
+              <th>Select S1</th>
+              <th>Select S0</th>
+              <th>Selected Input</th>
+              <th>Output Y</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 (HIGH)</td>
+              <td>X (Don't Care)</td>
+              <td>X (Don't Care)</td>
+              <td>None (Inhibited)</td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>D0</td>
+              <td><strong>D0</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>1</td>
+              <td>D1</td>
+              <td><strong>D1</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>0</td>
+              <td>D2</td>
+              <td><strong>D2</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>1</td>
+              <td>D3</td>
+              <td><strong>D3</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">X = Don't Care (Can be 0 or 1 without affecting output)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equation</h3>
+        <p class="equation-note">
+          The output <em>Y</em> can be expressed algebraically as a Sum-of-Products (SOP) expanded with minterms of the select lines and gated by the active-low enable strobe:
+        </p>
+        <div class="equation-box">
+          Y = Ḡ' · ( S1'·S0'·D0 + S1'·S0·D1 + S1·S0'·D2 + S1·S0·D3 )
+        </div>
+        <p class="equation-note">
+          When <code>Ḡ = 0</code> (Ḡ' = 1), exactly one AND product term is activated by the select lines, transferring the corresponding data bit to the OR gate output.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Where 4:1 multiplexers are utilized in modern computer engineering and communication systems.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            Data Routing &amp; Bus Multiplexing
+          </h4>
+          <p>Enables multiple peripheral devices or registers in an 8-bit or 16-bit CPU architecture to share a common internal data bus without electrical contention.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+            Universal Logic Generator
+          </h4>
+          <p>Any arbitrary 2-variable Boolean function (or 3-variable function using one variable connected to data lines) can be implemented directly using a single 4:1 MUX without external logic gates.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Parallel-to-Serial Conversion
+          </h4>
+          <p>Used in serial communication transmitters (UART) where a multi-bit parallel register is sampled sequentially into a serial transmission wire by cycling the select address lines with a clock counter.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            ALU Operation Selection
+          </h4>
+          <p>Steers the selected output from adder, subtractor, AND, or OR functional units to the accumulator destination based on CPU instruction opcode bits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation Back to Directory & Next Circuit -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="encoder-8-3.html" class="circuit-nav-link">
+          ← 8:3 Priority Encoder
+        </a>
+        <a href="mux-8-1.html" class="circuit-nav-link">
+          Next: 8:1 Multiplexer (74151) →
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 74153 4:1 Multiplexer Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/mux.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initMux41();
+    });
+  </script>
+</body>
+</html>
+

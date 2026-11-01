@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8:1 Multiplexer (IC 74151) — DECO MINI</title>
+  <meta name="description" content="Interactive 8:1 Multiplexer simulation, logic equations, truth table, and pinout details for IC 74151." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 74151</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">8:1 Multiplexer (74151)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title and IC Number & 2. Introduction and Working Principle -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 74151</span>
+        <span class="badge-active-high">8-to-1 Data Selector</span>
+      </div>
+      <h1>8:1 Multiplexer</h1>
+      <p class="circuit-principle">
+        The <strong>74151</strong> is an 8-line to 1-line multiplexer that selects binary data from one of eight input channels (D0 through D7) 
+        and delivers it to dual complementary outputs: a true non-inverted output <strong>Y</strong> and an inverted output <strong>W̄</strong>. 
+        Selection is dictated by a 3-bit binary address bus (S2, S1, S0). An active-low enable strobe (Ḡ) controls the entire circuit: 
+        when Ḡ = 1 (inhibited), output Y is clamped to 0 and W̄ is clamped to 1.
+      </p>
+    </section>
+
+    <!-- 3. Input, Output, Select-line, and Enable-line Details -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Data Inputs <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">D0 to D7</div>
+        <p>Eight data lines carrying input bits to be routed according to the select code.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Address Select Lines <span class="badge-active-high">3-bit Binary</span></h4>
+        <div class="pin-title">S2, S1, S0</div>
+        <p>3-bit address bus (S2=MSB, S0=LSB) selecting binary channel 000 (0) through 111 (7).</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Enable Strobe <span class="badge-active-low">Active-Low</span></h4>
+        <div class="pin-title">Ḡ (Pin 7)</div>
+        <p>Active-low strobe. When Ḡ = 0, normal multiplexing occurs. When Ḡ = 1, Y=0 and W̄=1.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Complementary Outputs <span class="badge-active-high">Dual Rails</span></h4>
+        <div class="pin-title">Y &amp; W̄</div>
+        <p>Y delivers true data D[sel]; W̄ delivers inverted data D̄[sel] when enabled.</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive 8:1 MUX Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetMux81()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset Default (D0=1, S=000, Ḡ=0)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Input & Select Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Data Inputs (0 / 1)</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">Channels D0–D7</span>
+            </div>
+            <div class="switches-row" id="mux81-data-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Address Select Bus [S2, S1, S0]</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">3-bit Decoder Code</span>
+            </div>
+            <div class="switches-row" id="mux81-select-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Enable Strobe Input Ḡ</span>
+              <span class="badge-active-low">Active-Low</span>
+            </div>
+            <div class="switches-row" id="mux81-enable-switch"></div>
+          </div>
+
+          <!-- Outputs Display -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Live Output Stage</span>
+              <span id="mux81-sel-label" style="color:var(--accent-cyan); font-family:var(--font-mono);"></span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="mux81-out-pill-y">
+                <span class="led-indicator" id="mux81-led-y"></span>
+                <span class="out-name">True Output Y:</span>
+                <span class="out-val" id="mux81-val-y">0</span>
+              </div>
+              <div class="output-pill" id="mux81-out-pill-w">
+                <span class="led-indicator" id="mux81-led-w"></span>
+                <span class="out-name">Inverted W̄:</span>
+                <span class="out-val" id="mux81-val-w">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">Signal Flow &amp; Logic Diagram</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">Cyan Wire = Logic 1</span>
+          </div>
+          <div class="schematic-svg-wrap" id="mux81-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Truth Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Truth Table (IC 74151 Function Table)</h3>
+        <p>The row matching the current input and select state is highlighted in real-time.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="mux81-table">
+          <thead>
+            <tr>
+              <th>Strobe Ḡ (Active-Low)</th>
+              <th>Select S2</th>
+              <th>Select S1</th>
+              <th>Select S0</th>
+              <th>Selected Input</th>
+              <th>Output Y (True)</th>
+              <th>Output W̄ (Inverted)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 (HIGH)</td>
+              <td>X</td>
+              <td>X</td>
+              <td>X</td>
+              <td>None (Inhibited)</td>
+              <td><strong>0</strong></td>
+              <td><strong>1</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>D0</td>
+              <td><strong>D0</strong></td>
+              <td><strong>D̄0</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>D1</td>
+              <td><strong>D1</strong></td>
+              <td><strong>D̄1</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>D2</td>
+              <td><strong>D2</strong></td>
+              <td><strong>D̄2</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>D3</td>
+              <td><strong>D3</strong></td>
+              <td><strong>D̄3</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>D4</td>
+              <td><strong>D4</strong></td>
+              <td><strong>D̄4</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>D5</td>
+              <td><strong>D5</strong></td>
+              <td><strong>D̄5</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>D6</td>
+              <td><strong>D6</strong></td>
+              <td><strong>D̄6</strong></td>
+            </tr>
+            <tr>
+              <td>0 (LOW)</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>D7</td>
+              <td><strong>D7</strong></td>
+              <td><strong>D̄7</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">Outputs: Y = D[sel], W̄ = NOT(D[sel])</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equation</h3>
+        <p class="equation-note">
+          The true output <em>Y</em> corresponds to the sum of minterms of the 3 select variables gated by the active data bits and the active-low enable strobe:
+        </p>
+        <div class="equation-box">
+          Y = Ḡ' · ∑ [ m_i · D_i ] &nbsp;&nbsp;(for i = 0 to 7)<br />
+          W̄ = Y' = ( Ḡ' · ∑ [ m_i · D_i ] )'
+        </div>
+        <p class="equation-note">
+          Expanded canonical representation: 
+          <code>Y = Ḡ' · (S2'S1'S0'D0 + S2'S1'S0 D1 + S2'S1 S0'D2 + S2'S1 S0 D3 + S2 S1'S0'D4 + S2 S1'S0 D5 + S2 S1 S0'D6 + S2 S1 S0 D7)</code>
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Key use cases for 8-channel multiplexers in digital logic systems.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            Arbitrary 4-Variable Function Generator
+          </h4>
+          <p>By connecting three input variables to S2, S1, S0 and applying the fourth variable (or 0/1/inverted) to inputs D0–D7, any 4-variable truth table can be implemented using one single 74151 chip.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            Analog/Digital Sensor Telemetry
+          </h4>
+          <p>Sequentially monitors 8 remote telemetry sensors or test points through a single communication channel using a 3-bit binary counter to scan all channels.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+              <line x1="4" y1="22" x2="4" y2="15"></line>
+            </svg>
+            Hardware Lookup Tables (LUT)
+          </h4>
+          <p>Modern Field Programmable Gate Arrays (FPGAs) use multiplexer-based Look-Up Tables (LUT3 / LUT4) directly modeled after 74151 architectures to implement logic gates dynamically.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            Byte-to-Bit Serialization
+          </h4>
+          <p>Transmits an 8-bit parallel byte from an internal register onto a high-speed serial bus, generating complementary polarity lines for differential signaling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation Back to Directory & Next Circuit -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mux-4-1.html" class="circuit-nav-link">
+          ← 4:1 Multiplexer (74153)
+        </a>
+        <a href="demux-1-4.html" class="circuit-nav-link">
+          Next: 1:4 Demultiplexer (74139) →
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 74151 8:1 Multiplexer Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/mux.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initMux81();
+    });
+  </script>
+</body>
+</html>
+

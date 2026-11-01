@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#EEF2F7" />
+  <rect x="1" y="1" width="46" height="46" rx="9" stroke="#D9E0EA" stroke-width="2" />
+  <!-- Logic Multiplexer / Gateway Motif -->
+  <path d="M12 12 L26 17 L26 31 L12 36 Z" fill="rgba(37, 99, 235, 0.12)" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Input rails -->
+  <line x1="6" y1="18" x2="12" y2="18" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+  <line x1="6" y1="24" x2="12" y2="24" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="6" y1="30" x2="12" y2="30" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+  <!-- Output rail -->
+  <line x1="26" y1="24" x2="38" y2="24" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>
+  <!-- Status node -->
+  <circle cx="38" cy="24" r="3" fill="#0891B2" />
+  <circle cx="38" cy="24" r="6" stroke="#0891B2" stroke-width="1.5" opacity="0.35" />
+  <!-- Select input -->
+  <line x1="19" y1="34" x2="19" y2="41" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+</svg>

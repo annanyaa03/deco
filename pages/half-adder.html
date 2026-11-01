@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Half Adder (IC 7486 + 7408) — DECO MINI</title>
+  <meta name="description" content="Interactive Half Adder simulation using IC 7486 XOR and IC 7408 AND gates. Live truth table, Boolean equations, and SVG gate diagram." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 7486+7408</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">Half Adder (7486 + 7408)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title & 2. Introduction -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 7486 + 7408</span>
+        <span class="badge-active-high">Gate-Level Arithmetic</span>
+      </div>
+      <h1>Half Adder</h1>
+      <p class="circuit-principle">
+        The <strong>Half Adder</strong> is the simplest binary addition circuit. It accepts two 1-bit inputs
+        (<strong>A</strong> and <strong>B</strong>) and produces two outputs: the
+        <strong>Sum (S)</strong> computed by an XOR gate (IC 7486) and the
+        <strong>Carry (C)</strong> computed by an AND gate (IC 7408).
+        It cannot handle a carry-in, which is why it is called "half" — the full adder extends it.
+      </p>
+    </section>
+
+    <!-- 3. Pin Details -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Input A <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">A (Bit 0)</div>
+        <p>First single-bit operand. Connects to both the XOR (IC 7486) and AND (IC 7408) gates.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Input B <span class="badge-active-high">Active-High</span></h4>
+        <div class="pin-title">B (Bit 1)</div>
+        <p>Second single-bit operand. Also fans out to both logic gates.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Sum Output <span class="badge-active-high">XOR (7486)</span></h4>
+        <div class="pin-title">S = A ⊕ B</div>
+        <p>High when exactly one input is high. Represents the least-significant bit of the addition result.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Carry Output <span class="badge-active-high">AND (7408)</span></h4>
+        <div class="pin-title">C = A · B</div>
+        <p>High only when both inputs are high (1+1=10₂). This carry propagates to the next significant bit.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Enable</h4>
+        <div class="pin-title">No Enable</div>
+        <p>Pure gate logic — no strobe or enable pin. Outputs are always combinationally driven by A and B.</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive Half Adder Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetHalfAdder()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset (A=0, B=0)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Input Bits (0 / 1)</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">A and B operands</span>
+            </div>
+            <div class="switches-row" id="ha-input-switches"></div>
+          </div>
+
+          <!-- Outputs Display -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Live Outputs</span>
+              <span id="ha-eq-label" style="color:var(--primary); font-family:var(--font-mono);"></span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="ha-out-pill-s">
+                <span class="led-indicator" id="ha-led-s"></span>
+                <span class="out-name">Sum S:</span>
+                <span class="out-val" id="ha-val-s">0</span>
+              </div>
+              <div class="output-pill" id="ha-out-pill-c">
+                <span class="led-indicator" id="ha-led-c"></span>
+                <span class="out-name">Carry C:</span>
+                <span class="out-val" id="ha-val-c">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">Gate-Level Signal Flow</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">Teal Wire = Logic 1</span>
+          </div>
+          <div class="schematic-svg-wrap" id="ha-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Truth Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Truth Table — Half Adder</h3>
+        <p>The row matching the current input state is highlighted in real-time.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="ha-table">
+          <thead>
+            <tr>
+              <th>Input A</th>
+              <th>Input B</th>
+              <th>Sum S (XOR)</th>
+              <th>Carry C (AND)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td><td>0</td><td><strong>0</strong></td><td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>0</td><td>1</td><td><strong>1</strong></td><td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td><strong>1</strong></td><td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>1</td><td>1</td><td><strong>0</strong></td><td><strong>1</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">S = A⊕B &nbsp;|&nbsp; C = A·B</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equations</h3>
+        <p class="equation-note">
+          The Half Adder produces two canonical SOP expressions, one for each output:
+        </p>
+        <div class="equation-box">
+          S = A'B + AB' &nbsp;&nbsp;= A ⊕ B &nbsp;&nbsp;(XOR — IC 7486)<br />
+          C = AB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(AND — IC 7408)
+        </div>
+        <p class="equation-note">
+          <strong>S</strong> is HIGH for minterms Σm(1, 2) — when exactly one input is 1.<br />
+          <strong>C</strong> is HIGH for minterm Σm(3) — only when both inputs are 1 (the binary value 2).
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Where the Half Adder structure appears in real digital systems.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            LSB Stage of Ripple-Carry Adders
+          </h4>
+          <p>In an n-bit ripple-carry adder, the least-significant bit position uses a half adder (no carry-in possible), while all subsequent positions use full adders that accept carry-in from the previous stage.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Building Block of the Full Adder
+          </h4>
+          <p>Two half adders cascaded with an OR gate form a full adder. Understanding the half adder is therefore a prerequisite for understanding ripple-carry arithmetic used in the IC 7483 4-bit binary adder.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Binary Counters &amp; Incrementers
+          </h4>
+          <p>A half adder can increment a single bit by one. Chaining them (with the carry output feeding the next bit's XOR) produces a parallel binary incrementer, which is used in program counters and address generators.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+              <line x1="4" y1="22" x2="4" y2="15"></line>
+            </svg>
+            ALU Design
+          </h4>
+          <p>Arithmetic Logic Units in microprocessors are built from arrays of half and full adders. The sum and carry signals feed into carry-lookahead logic for high-speed computation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="encoder-8-3.html" class="circuit-nav-link">
+          ← 8:3 Encoder (74148)
+        </a>
+        <a href="full-adder.html" class="circuit-nav-link">
+          Next: Full Adder →
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 7486 + 7408 Half Adder Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/half-adder.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initHalfAdder();
+    });
+  </script>
+</body>
+</html>

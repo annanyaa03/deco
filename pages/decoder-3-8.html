@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3:8 Inverting Decoder (IC 74138) — DECO MINI</title>
+  <meta name="description" content="Interactive 3:8 Decoder simulation, logic equations, truth table, and 3-line gating enable details for IC 74138." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo.svg" alt="DECO MINI Logo" />
+        <div class="brand-meta">
+          <span class="brand-name">
+            DECO MINI
+            <span class="brand-badge">IC 74138</span>
+          </span>
+          <span class="brand-tagline">Combinational Logic Workbench</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#circuits" class="nav-link active">Circuits</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-wrap">
+    <div class="container breadcrumbs">
+      <a href="../index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="../index.html#circuits">Circuits</a>
+      <span class="separator">/</span>
+      <span class="current">3:8 Decoder (74138)</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 1. Title and IC Number & 2. Introduction and Working Principle -->
+    <section class="circuit-header">
+      <div class="circuit-header-top">
+        <span class="ic-badge">IC 74138</span>
+        <span class="badge-active-low">3-to-8 Line Inverting Decoder</span>
+      </div>
+      <h1>3:8 Inverting Decoder</h1>
+      <p class="circuit-principle">
+        The <strong>74138</strong> is a high-speed 3-line to 8-line inverting decoder/demultiplexer. 
+        It accepts a 3-bit binary address word (A2/C, A1/B, A0/A) and asserts exactly one of eight 
+        <strong>active-low outputs (Ȳ0 through Ȳ7)</strong> by driving it to logic LOW (0). 
+        The IC features a sophisticated 3-line gating enable architecture comprising one active-high input (<strong>G1</strong>) 
+        and two active-low inputs (<strong>Ḡ2A</strong> and <strong>Ḡ2B</strong>). The device functions only when 
+        <code>G1 = 1</code>, <code>Ḡ2A = 0</code>, and <code>Ḡ2B = 0</code>; otherwise, all eight outputs are locked HIGH (1).
+      </p>
+    </section>
+
+    <!-- 3. Technical Details Grid -->
+    <section class="pin-details-grid">
+      <div class="pin-detail-card">
+        <h4>Address Inputs <span class="badge-active-high">3-bit Binary</span></h4>
+        <div class="pin-title">A2 (C), A1 (B), A0 (A)</div>
+        <p>3 binary inputs selecting minterms m0 (000) through m7 (111). A2 is the MSB.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Active-High Enable <span class="badge-active-high">G1</span></h4>
+        <div class="pin-title">G1 (Pin 6)</div>
+        <p>Must be held HIGH (1) for normal decoder operation.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Active-Low Enables <span class="badge-active-low">Dual Strobes</span></h4>
+        <div class="pin-title">Ḡ2A &amp; Ḡ2B (Pins 4, 5)</div>
+        <p>Both strobes must be held LOW (0) to permit decoding.</p>
+      </div>
+
+      <div class="pin-detail-card">
+        <h4>Decoded Outputs <span class="badge-active-low">Active-Low</span></h4>
+        <div class="pin-title">Ȳ0 through Ȳ7</div>
+        <p>8 mutually exclusive outputs. The addressed output goes LOW (0); all others remain HIGH (1).</p>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Simulation & 4. Logic Diagram -->
+    <section class="sim-workspace">
+      <div class="sim-header">
+        <div class="sim-header-title">
+          <h2>Interactive 3:8 Decoder Simulator</h2>
+          <span class="sim-status-pill">
+            <span class="status-dot"></span>
+            Real-Time Engine
+          </span>
+        </div>
+        <button type="button" class="sim-btn-reset" onclick="resetDecoder()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset Default (G1=1, Ḡ2A=0, Ḡ2B=0, A=000)
+        </button>
+      </div>
+
+      <div class="sim-main-grid">
+        <!-- Input & Select Controls Left -->
+        <div class="sim-controls-panel">
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>Address Inputs [A2, A1, A0]</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">Minterm Address</span>
+            </div>
+            <div class="switches-row" id="decoder-addr-switches"></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-group-title">
+              <span>3-Line Gating Enable System</span>
+              <span style="font-size:0.7rem; color:var(--text-muted);">G1=1, Ḡ2A=0, Ḡ2B=0</span>
+            </div>
+            <div class="switches-row" id="decoder-enable-switches"></div>
+          </div>
+
+          <!-- Outputs Display -->
+          <div class="sim-outputs-panel">
+            <div class="control-group-title">
+              <span>Decoded Active-Low Outputs (0 = Asserted)</span>
+              <span id="decoder-sel-label" style="color:var(--sig-active-low); font-family:var(--font-mono);"></span>
+            </div>
+            <div class="outputs-display-grid">
+              <div class="output-pill" id="decoder-pill-y0">
+                <span class="led-indicator" id="decoder-led-y0"></span>
+                <span class="out-name">Ȳ0:</span>
+                <span class="out-val" id="decoder-val-y0">0</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y1">
+                <span class="led-indicator" id="decoder-led-y1"></span>
+                <span class="out-name">Ȳ1:</span>
+                <span class="out-val" id="decoder-val-y1">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y2">
+                <span class="led-indicator" id="decoder-led-y2"></span>
+                <span class="out-name">Ȳ2:</span>
+                <span class="out-val" id="decoder-val-y2">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y3">
+                <span class="led-indicator" id="decoder-led-y3"></span>
+                <span class="out-name">Ȳ3:</span>
+                <span class="out-val" id="decoder-val-y3">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y4">
+                <span class="led-indicator" id="decoder-led-y4"></span>
+                <span class="out-name">Ȳ4:</span>
+                <span class="out-val" id="decoder-val-y4">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y5">
+                <span class="led-indicator" id="decoder-led-y5"></span>
+                <span class="out-name">Ȳ5:</span>
+                <span class="out-val" id="decoder-val-y5">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y6">
+                <span class="led-indicator" id="decoder-led-y6"></span>
+                <span class="out-name">Ȳ6:</span>
+                <span class="out-val" id="decoder-val-y6">1</span>
+              </div>
+              <div class="output-pill" id="decoder-pill-y7">
+                <span class="led-indicator" id="decoder-led-y7"></span>
+                <span class="out-name">Ȳ7:</span>
+                <span class="out-val" id="decoder-val-y7">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Schematic Diagram Right -->
+        <div class="schematic-box">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">Signal Flow &amp; Logic Diagram</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">Amber Output = Logic 0 (Asserted)</span>
+          </div>
+          <div class="schematic-svg-wrap" id="decoder-schematic-svg"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Truth Table -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Truth Table (IC 74138 Function Table)</h3>
+        <p>Reflects the exact TTL manufacturer specifications with enable conditions and inverted outputs.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="truth-table" id="decoder-table">
+          <thead>
+            <tr>
+              <th>G1</th>
+              <th>Ḡ2A</th>
+              <th>Ḡ2B</th>
+              <th>A2</th>
+              <th>A1</th>
+              <th>A0</th>
+              <th>Ȳ0</th><th>Ȳ1</th><th>Ȳ2</th><th>Ȳ3</th><th>Ȳ4</th><th>Ȳ5</th><th>Ȳ6</th><th>Ȳ7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0 / X</td><td>1 / X</td><td>1 / X</td>
+              <td>X</td><td>X</td><td>X</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>0</td><td>0</td><td>0</td>
+              <td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>0</td><td>0</td><td>1</td>
+              <td>1</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>0</td><td>1</td><td>0</td>
+              <td>1</td><td>1</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>0</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td><td>1</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td><strong>0</strong></td><td>1</td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>0</td><td>1</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td><strong>0</strong></td><td>1</td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>1</td><td>0</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td><strong>0</strong></td><td>1</td>
+            </tr>
+            <tr>
+              <td>1</td><td>0</td><td>0</td>
+              <td>1</td><td>1</td><td>1</td>
+              <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td><strong>0</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-legend">
+          <span><span class="legend-dot"></span> Live Highlighted Row</span>
+          <span style="margin-left:auto;">Enabled only when G1 = 1 AND Ḡ2A = 0 AND Ḡ2B = 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Boolean Expression -->
+    <section class="panel-section">
+      <div class="equation-card">
+        <h3>Boolean Expression &amp; Logic Equation</h3>
+        <p class="equation-note">
+          Internal enable condition: <code>E = G1 · Ḡ2A' · Ḡ2B'</code>.<br />
+          Each active-low output is synthesized through an internal 4-input NAND gate evaluating the enable and the corresponding address minterm:
+        </p>
+        <div class="equation-box">
+          Ȳ0 = ( E · A2' · A1' · A0' )' = E' + A2 + A1 + A0<br />
+          Ȳ1 = ( E · A2' · A1' · A0  )' = E' + A2 + A1 + A0'<br />
+          Ȳ2 = ( E · A2' · A1  · A0' )' = E' + A2 + A1' + A0<br />
+          Ȳ3 = ( E · A2' · A1  · A0  )' = E' + A2 + A1' + A0'<br />
+          Ȳ4 = ( E · A2  · A1' · A0' )' = E' + A2' + A1 + A0<br />
+          Ȳ5 = ( E · A2  · A1' · A0  )' = E' + A2' + A1 + A0'<br />
+          Ȳ6 = ( E · A2  · A1  · A0' )' = E' + A2' + A1' + A0<br />
+          Ȳ7 = ( E · A2  · A1  · A0  )' = E' + A2' + A1' + A0'
+        </div>
+        <p class="equation-note">
+          Because NAND outputs are active-low, connecting the outputs directly to an external NAND gate implements any arbitrary Boolean function in canonical Sum of Products (SOP) form!
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Practical Applications -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Practical Applications</h3>
+        <p>Essential systems utilizing 3:8 decoders across hardware architectures.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+              <line x1="7" y1="2" x2="7" y2="22"></line>
+              <line x1="17" y1="2" x2="17" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="2" y1="7" x2="7" y2="7"></line>
+              <line x1="2" y1="17" x2="7" y2="17"></line>
+              <line x1="17" y1="17" x2="22" y2="17"></line>
+              <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+            Microprocessor Memory Address Decoding
+          </h4>
+          <p>Maps 64KB memory spaces into eight 8KB blocks by routing higher-order address lines A15..A13 to 74138 address inputs to drive SRAM/EEPROM chip enable pins.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Seamless IC Expansion (1-of-16, 1-of-32)
+          </h4>
+          <p>Two 74138 ICs can be cascaded to build a 4:16 decoder without external inverters: address line A3 is simply wired to G1 on one chip and to Ḡ2A on the other.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            I/O Port Address Strobe
+          </h4>
+          <p>Controls peripheral chips (parallel I/O, UARTs, timer counters) in bus-based embedded designs by generating isolated read/write chip select strobes.</p>
+        </div>
+
+        <div class="app-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+            1-of-8 Data Demultiplexer
+          </h4>
+          <p>By wiring data to enable pin Ḡ2A (with G1=1 and Ḡ2B=0), the 74138 acts as a complete 1:8 demultiplexer routing serial data to one of eight output lines.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Navigation Back to Directory & Next Circuit -->
+    <nav class="circuit-nav-bar">
+      <a href="../index.html#circuits" class="circuit-nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Circuit Directory
+      </a>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="demux-1-4.html" class="circuit-nav-link">
+          ← 1:4 Demultiplexer (74139)
+        </a>
+        <a href="encoder-8-3.html" class="circuit-nav-link">
+          Next: 8:3 Priority Encoder (74148) →
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">DECO MINI • Digital Electronics Workbench</div>
+        <div class="footer-desc">IC 74138 3:8 Decoder Educational Guide &amp; Interactive Simulator.</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#circuits">Circuits</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="https://github.com/switchd2/Deco--Mini-" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/decoder.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initDecoder();
+    });
+  </script>
+</body>
+</html>
+
